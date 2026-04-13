@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Zuru Media | Premium Agency</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  background:#f5efe6;
+  color:#333;
+}
+
+/* NAVBAR */
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#5a1e1e;
+  padding:15px 20px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.2);
+}
+
+.nav-container{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.logo{
+  color:#f5efe6;
+  font-size:1.3rem;
+  font-weight:bold;
+}
+
+nav a{
+  color:#f5efe6;
+  text-decoration:none;
+  margin:0 10px;
+  font-size:0.95rem;
+}
+
+.search-box{
+  display:flex;
+  align-items:center;
+  background:#f5efe6;
+  padding:6px 10px;
+  border-radius:20px;
+}
+
+.search-box input{
+  border:none;
+  outline:none;
+  background:transparent;
+  width:120px;
+}
+
+/* SECTIONS */
+section{
+  padding:80px 20px;
+  text-align:center;
+}
+
+h2{
+  color:#5a1e1e;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+p{
+  color:#6b5b4d;
+}
+
+/* HERO */
+.hero{
+  padding:120px 20px;
+}
+
+/* GRID */
+.grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:center;
+  margin-top:30px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  flex:1;
+  min-width:250px;
+}
+
+/* CONTACT FORM */
+input, textarea{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border:1px solid #ddd;
+  border-radius:8px;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  background:#5a1e1e;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* FOOTER */
+footer{
+  background:#5a1e1e;
+  color:#f5efe6;
+  text-align:center;
+  padding:20px;
+  margin-top:50px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header>
+  <div class="nav-container">
+
+    <div class="logo">Zuru Media</div>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="search-box">
+      <input id="searchInput" type="text" placeholder="Search...">
+      <button onclick="runSearch()" style="border:none;background:none;cursor:pointer;">🔍</button>
+    </div>
+
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <h2>Welcome to Zuru Media</h2>
+  <p>We build premium digital brands, websites & creative designs.</p>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <h2>Our Services</h2>
+
+  <div class="grid">
+    <div class="card">Website Design</div>
+    <div class="card">Brand Identity</div>
+    <div class="card">Social Media Design</div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <h2>Portfolio</h2>
+
+  <div class="grid">
+    <div class="card">Project 1</div>
+    <div class="card">Project 2</div>
+    <div class="card">Project 3</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact Us</h2>
+
+  <p>Let’s work together — send us a message or reach out directly.</p>
+
+  <div class="grid">
+
+    <!-- FORM -->
+    <div class="card">
+      <form onsubmit="sendMessage(event)">
+
+        <input id="name" type="text" placeholder="Your Name" required>
+        <input id="email" type="email" placeholder="Your Email" required>
+        <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+
+        <button type="submit">Send Message</button>
+
+      </form>
+    </div>
+
+    <!-- DIRECT CONTACT -->
+    <div class="card" style="text-align:left;">
+
+      <h3 style="color:#5a1e1e;">Direct Contact</h3>
+
+      <p><b>WhatsApp:</b> 08102407071</p>
+
+      <p>
+        <b>Email:</b>
+        <a href="#" onclick="openGmail()" style="color:#5a1e1e; font-weight:bold; text-decoration:none;">
+          chijindunicholasdestiny05@gmail.com
+        </a>
+      </p>
+
+      <p style="margin-top:10px;">
+        Click email to open Gmail instantly or use form.
+      </p>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 Zuru Media. All Rights Reserved.
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+
+function runSearch() {
+  const query = document.getElementById("searchInput").value.toLowerCase();
+
+  if(query.includes("home")) {
+    document.getElementById("home").scrollIntoView({behavior:"smooth"});
+  }
+  else if(query.includes("services")) {
+    document.getElementById("services").scrollIntoView({behavior:"smooth"});
+  }
+  else if(query.includes("portfolio")) {
+    document.getElementById("portfolio").scrollIntoView({behavior:"smooth"});
+  }
+  else if(query.includes("contact")) {
+    document.getElementById("contact").scrollIntoView({behavior:"smooth"});
+  }
+  else {
+    alert("Search not found. Try: home, services, portfolio, contact");
+  }
+}
+
+function openGmail() {
+  const email = "chijindunicholasdestiny05@gmail.com";
+  window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`, "_blank");
+}
+
+function sendMessage(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message").value;
+
+  const subject = `Message from ${name}`;
+  const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0A${message}`;
+
+  window.open(
+    `mailto:chijindunicholasdestiny05@gmail.com?subject=${subject}&body=${body}`,
+    "_blank"
+  );
+}
+
+</script>
+
+</body>
+        </html>
