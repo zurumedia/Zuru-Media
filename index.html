@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zuru Media | Creative Studio</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0d0d0d;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+
+    /* NAVBAR */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: gold;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: gold;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+      url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d') center/cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: 50px;
+      color: gold;
+    }
+
+    .hero p {
+      margin-top: 10px;
+      font-size: 18px;
+      max-width: 600px;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: gold;
+      color: black;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    section {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    h2 {
+      color: gold;
+      margin-bottom: 20px;
+    }
+
+    /* SERVICES */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    /* PORTFOLIO */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    /* CONTACT */
+    form {
+      max-width: 500px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    input, textarea {
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button {
+      background: gold;
+      border: none;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* WHATSAPP BUTTON */
+    .whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      padding: 15px;
+      border-radius: 50%;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    footer {
+      background: #000;
+      padding: 20px;
+      text-align: center;
+      color: gray;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">ZURU MEDIA</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <h1>ZURU MEDIA</h1>
+  <p>We create cinematic visuals, branding, photography & digital experiences that elevate your brand.</p>
+  <a href="#contact" class="btn">Hire Us</a>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2>About Us</h2>
+  <p>
+    Zuru Media is a creative digital studio focused on photography, branding, design, and storytelling.
+    We help brands stand out with premium visuals and modern digital solutions.
+  </p>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="services">
+    <div class="card">Photography</div>
+    <div class="card">Videography</div>
+    <div class="card">Brand Design</div>
