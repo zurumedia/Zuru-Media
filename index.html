@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Zuru Media | Premium Creative Agency</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins', sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#0a0a0a;
+color:#fff;
+overflow-x:hidden;
+}
+
+/* NAV */
+nav{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 30px;
+background:rgba(0,0,0,0.7);
+backdrop-filter:blur(12px);
+z-index:1000;
+}
+
+.logo{
+font-size:22px;
+font-weight:700;
+color:#d4af37;
+}
+
+nav ul{
+display:flex;
+gap:20px;
+list-style:none;
+}
+
+nav ul li a{
+color:#fff;
+text-decoration:none;
+font-size:14px;
+}
+
+nav ul li a:hover{
+color:#d4af37;
+}
+
+/* HERO */
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.9)),
+url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d') center/cover;
+padding:20px;
+}
+
+.hero h1{
+font-size:60px;
+color:#d4af37;
+}
+
+.hero p{
+max-width:600px;
+margin-top:10px;
+opacity:0.9;
+}
+
+.btn{
+margin-top:20px;
+padding:12px 25px;
+background:#d4af37;
+color:#000;
+border:none;
+font-weight:600;
+border-radius:6px;
+}
+
+/* SECTIONS */
+section{
+padding:90px 20px;
+max-width:1100px;
+margin:auto;
+}
+
+h2{
+text-align:center;
+margin-bottom:40px;
+color:#d4af37;
+}
+
+/* SERVICES */
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.card{
+background:#111;
+padding:25px;
+border-radius:12px;
+border:1px solid #222;
+}
+
+/* PORTFOLIO */
+.portfolio{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+}
+
+.portfolio img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:10px;
+}
+
+/* CONTACT */
+.contact form{
+display:flex;
+flex-direction:column;
+gap:10px;
+max-width:500px;
+margin:auto;
+}
+
+input, textarea{
+padding:12px;
+border-radius:6px;
+background:#111;
+color:#fff;
+border:1px solid #222;
+}
+
+textarea{
+height:120px;
+resize:none;
+}
+
+.contact a{
+display:inline-block;
+margin-top:15px;
+padding:12px 20px;
+background:#d4af37;
+color:#000;
+text-decoration:none;
+border-radius:6px;
+font-weight:600;
+}
+
+/* WHATSAPP */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+width:60px;
+height:60px;
+background:#25D366;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+font-size:28px;
+text-decoration:none;
+}
+
+/* FOOTER */
+footer{
+text-align:center;
+padding:30px;
+background:#000;
+border-top:1px solid #222;
+margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="logo">ZURU MEDIA</div>
+<ul id="menu">
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#services">Services</a></li>
+<li><a href="#portfolio">Portfolio</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+<section class="hero" id="home">
+<h1>ZURU MEDIA</h1>
+<p>We build powerful brands, cinematic visuals, and digital experiences.</p>
+<a href="#contact"><button class="btn">Get Started</button></a>
+</section>
+
+<section id="about">
+<h2>About Us</h2>
+<p style="text-align:center;">
+Zuru Media is a creative agency focused on branding, photography, videography, and digital storytelling.
+</p>
+</section>
+
+<section id="services">
+<h2>Services</h2>
+<div class="services">
+<div class="card">Photography</div>
+<div class="card">Videography</div>
+<div class="card">Brand Design</div>
+</div>
+</section>
+
+<section id="portfolio">
+<h2>Portfolio</h2>
+<div class="portfolio">
+<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+<img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f">
+<img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4">
+<img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact Us</h2>
+
+<form>
+<input type="text" placeholder="Your Name">
+<input type="email" placeholder="Your Email">
+<textarea placeholder="Message"></textarea>
+<button class="btn">Send Message</button>
+</form>
+
+<br>
+
+<a href="mailto:chijindunicholasdestiny05@gmail.com">
+Email: chijindunicholasdestiny05@gmail.com
+</a>
+
+</section>
+
+<footer>
+© 2026 Zuru Media. All Rights Reserved.
+</footer>
+
+<a class="whatsapp" href="https://wa.me/2348102407071" target="_blank">💬</a>
+
+</body>
+</html>
