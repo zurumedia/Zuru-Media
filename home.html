@@ -1,0 +1,85 @@
+<!-- CONTACT SECTION -->
+<section id="contact" style="padding:80px 20px; background:#f5efe6;">
+  <div style="max-width:1000px; margin:auto; text-align:center;">
+
+    <h2 style="font-size:2.5rem; color:#5a1e1e; margin-bottom:10px;">
+      Contact Us
+    </h2>
+
+    <p style="color:#7a6a5a; margin-bottom:40px;">
+      Let’s work together — send us a message or reach out directly.
+    </p>
+
+    <!-- GRID LAYOUT -->
+    <div style="display:flex; flex-wrap:wrap; gap:30px; justify-content:center;">
+
+      <!-- CONTACT FORM -->
+      <form onsubmit="sendMessage(event)"
+        style="flex:1; min-width:280px; background:#fff; padding:25px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.08); text-align:left;">
+
+        <input id="name" type="text" placeholder="Your Name" required
+          style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px;">
+
+        <input id="email" type="email" placeholder="Your Email" required
+          style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px;">
+
+        <textarea id="message" placeholder="Your Message" required rows="5"
+          style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px;"></textarea>
+
+        <button type="submit"
+          style="width:100%; padding:12px; background:#5a1e1e; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">
+          Send Message
+        </button>
+      </form>
+
+      <!-- DIRECT CONTACT BOX -->
+      <div style="flex:1; min-width:280px; background:#fff; padding:25px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.08); text-align:left;">
+
+        <h3 style="color:#5a1e1e;">Direct Contact</h3>
+
+        <p style="margin-top:15px;"><b>WhatsApp:</b> 08102407071</p>
+
+        <p>
+          <b>Email:</b>
+          <a href="#"
+             onclick="openGmail()"
+             style="color:#5a1e1e; font-weight:bold; text-decoration:none;">
+            chijindunicholasdestiny05@gmail.com
+          </a>
+        </p>
+
+        <p style="margin-top:20px; color:#7a6a5a;">
+          Click email to open Gmail instantly or use the form to send a message.
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  function openGmail() {
+    const email = "chijindunicholasdestiny05@gmail.com";
+    window.open(
+      `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`,
+      "_blank"
+    );
+  }
+
+  function sendMessage(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    const subject = `New Message from ${name}`;
+    const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+
+    window.open(
+      `mailto:chijindunicholasdestiny05@gmail.com?subject=${subject}&body=${body}`,
+      "_blank"
+    );
+  }
+</script>
