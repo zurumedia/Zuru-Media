@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Zuru Media CBT Simulator</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#2b0a0a,#4a0f1f,#1a0505);
+color:white;
+overflow-x:hidden;
+}
+
+/* Center moving text */
+#movingText{
+position:fixed;
+top:40%;
+width:100%;
+text-align:center;
+font-size:18px;
+opacity:0.6;
+animation:moveText 8s linear infinite;
+}
+
+@keyframes moveText{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-20px);}
+100%{transform:translateY(0px);}
+}
+
+/* Container */
+.container{
+max-width:900px;
+margin:40px auto;
+background:rgba(255,255,255,0.08);
+padding:20px;
+border-radius:15px;
+backdrop-filter:blur(10px);
+}
+
+/* Footer */
+footer{
+position:fixed;
+bottom:0;
+width:100%;
+text-align:center;
+padding:10px;
+background:rgba(0,0,0,0.5);
+font-size:12px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="movingText">
+Welcome to Zuru Media CBT Platform • Practice Mode Only • Not Real JAMB Questions
+</div>
+
+<div class="container">
+
+<h2>CBT Subject Selection</h2>
+<p>English is compulsory. Select exactly 3 subjects.</p>
+
+<form id="subjectForm">
+
+<label><input type="checkbox" checked disabled> English (Compulsory)</label><br>
+
+<label><input type="checkbox" name="subj" value="CRS"> CRS</label><br>
+<label><input type="checkbox" name="subj" value="Government"> Government</label><br>
+<label><input type="checkbox" name="subj" value="Economics"> Economics</label><br>
+<label><input type="checkbox" name="subj" value="Literature"> Literature</label><br>
+<label><input type="checkbox" name="subj" value="Marketing"> Marketing</label><br>
+<label><input type="checkbox" name="subj" value="Biology"> Biology</label><br>
+<label><input type="checkbox" name="subj" value="Physics"> Physics</label><br>
+<label><input type="checkbox" name="subj" value="Chemistry"> Chemistry</label><br>
+<label><input type="checkbox" name="subj" value="Civic"> Civic Education</label><br><br>
+
+<button type="button" onclick="startExam()">Start Exam</button>
+</form>
+
+</div>
+
+<div class="container" id="examBox" style="display:none;">
+<h2 id="subjectTitle"></h2>
+<div id="timer">120:00</div>
+<div id="questionBox"></div>
+<button onclick="prevQ()">Previous</button>
+<button onclick="nextQ()">Next</button>
+<button onclick="submitExam()">Submit</button>
+</div>
+
+<footer>
+© All Rights Reserved 2026 Zuru Media
+</footer>
+
+<script>
+// ---------------- QUESTIONS (ORIGINAL BANK) ----------------
+const questionBank = {
+English:[
+{q:"Choose the correct word: She ___ to school daily.",a:["go","goes","gone","going"],c:1},
+{q:"Antonym of 'big' is?",a:["large","huge","small","wide"],c:2},
+{q:"He is good ___ football.",a:["in","at","on","by"],c:1},
+{q:"Plural of child?",a:["childs","children","childes","childer"],c:1},
+{q:"Choose correct: I have ___ the work.",a:["do","did","done","doing"],c:2},
+{q:"Synonym of happy?",a:["sad","joyful","angry","tired"],c:1},
+{q:"He ___ a doctor.",a:["is","are","am","be"],c:0},
+{q:"Pick correct spelling:",a:["accomodation","accommodation","acomodation","accommdation"],c:1},
+{q:"She sings ___ than him.",a:["good","better","best","well"],c:1},
+{q:"Opposite of hot?",a:["warm","cold","boil","heat"],c:1}
+],
+
+CRS:[
+{q:"Who created man?",a:["Angel","God","Prophet","Adam"],c:1},
+{q:"Bible contains how many books?",a:["66","70","80","50"],c:0},
+{q:"Jesus was born in?",a:["Nazareth","Bethlehem","Jerusalem","Cana"],c:1},
+{q:"Who betrayed Jesus?",a:["Peter","John","Judas","Paul"],c:2},
+{q:"Fruit forbidden in Eden?",a:["Apple","Mango","Banana","Orange"],c:0},
+{q:"Noah built?",a:["Temple","Ark","House","Boat"],c:1},
+{q:"Ten commandments given on?",a:["Mountain","Sea","River","Forest"],c:0},
+{q:"Who was Moses father-in-law?",a:["Jethro","Jacob","Aaron","David"],c:0},
+{q:"First man created?",a:["Adam","Noah","Abel","Cain"],c:0},
+{q:"Jesus had how many disciples?",a:["10","12","14","7"],c:1}
+],
+
+Government:[
+{q:"Nigeria gained independence in?",a:["1960","1950","1970","1965"],c:0},
+{q:"Head of state is?",a:["President","Governor","Chairman","Minister"],c:0},
+{q:"Constitution means?",a:["Law book","Bible","Rule system","Agreement"],c:2},
+{q:"Legislature makes?",a:["Laws","Money","Goods","Food"],c:0},
+{q:"Democracy means?",a:["Military rule","People rule","King rule","None"],c:1},
+{q:"Nigeria has how many states?",a:["36","30","40","25"],c:0},
+{q:"Senate is part of?",a:["Judiciary","Legislature","Army","Police"],c:1},
+{q:"Local government is?",a:["Federal","Lowest level","State","Court"],c:1},
+{q:"Electoral body in Nigeria?",a:["INEC","NFA","NBA","EFCC"],c:0},
+{q:"Rule of law means?",a:["No law","Law above all","Army rule","Rich rule"],c:1}
+],
+
+Economics:[
+{q:"Demand means?",a:["Want + ability to pay","Free goods","Luxury","Supply"],c:0},
+{q:"Inflation is?",a:["Price fall","Price rise","Money loss","Trade"],c:1},
+{q:"Market is place for?",a:["Buying and selling","Sleeping","Gaming","Travel"],c:0},
+{q:"Economics studies?",a:["Money use","Food","Religion","Sport"],c:0},
+{q:"Scarcity means?",a:["Plenty","Limited resources","Free goods","Richness"],c:1},
+{q:"Supply means?",a:["Goods available","Demand","Money","Debt"],c:0},
+{q:"Bank deals with?",a:["Money","Food","Cars","Books"],c:0},
+{q:"GDP measures?",a:["Population","Income","Weather","Crime"],c:1},
+{q:"Opportunity cost is?",a:["Next best alternative","Profit","Loss","Tax"],c:0},
+{q:"Utility means?",a:["Satisfaction","Money","Goods","Trade"],c:0}
+],
+
+Literature:[
+{q:"Poem is called?",a:["Prose","Verse","Drama","Novel"],c:1},
+{q:"Writer of play is?",a:["Novelist","Playwright","Poet","Actor"],c:1},
+{q:"Drama is meant to be?",a:["Read","Performed","Written","Drawn"],c:1},
+{q:"Figures of speech used in?",a:["Math","Language","Science","Law"],c:1},
+{q:"Sonnet has how many lines?",a:["12","14","10","16"],c:1},
+{q:"Main character is?",a:["Hero","Villain","Actor","Writer"],c:0},
+{q:"Story teller is?",a:["Narrator","Actor","Writer","Poet"],c:0},
+{q:"Comedy is?",a:["Funny play","Sad play","War","Speech"],c:0},
+{q:"Tragedy ends with?",a:["Happiness","Death","Joy","Victory"],c:1},
+{q:"Novel is?",a:["Long story","Poem","Song","Drama"],c:0}
+],
+
+Biology:[
+{q:"Basic unit of life?",a:["Cell","Atom","Organ","Tissue"],c:0},
+{q:"Plants make food by?",a:["Respiration","Photosynthesis","Digestion","Fermentation"],c:1},
+{q:"Human heart has how many chambers?",a:["2","3","4","5"],c:2},
+{q:"Blood carries?",a:["Oxygen","Food","Water","All"],c:3},
+{q:"Respiration produces?",a:["Energy","Food","Water","Soil"],c:0},
+{q:"Largest organ?",a:["Heart","Skin","Liver","Brain"],c:1},
+{q:"Plants absorb water by?",a:["Leaves","Roots","Stem","Flower"],c:1},
+{q:"DNA carries?",a:["Food","Genetic info","Water","Air"],c:1},
+{q:"Red blood cells carry?",a:["Oxygen","Carbon","Water","Salt"],c:0},
+{q:"Green pigment in plants?",a:["Chlorophyll","Hemoglobin","Melanin","Keratin"],c:0}
+],
+
+Physics:[
+{q:"Unit of force?",a:["Newton","Watt","Volt","Joule"],c:0},
+{q:"Speed formula?",a:["D/T","T/D","D+T","D×T"],c:0},
+{q:"Energy unit?",a:["Joule","Newton","Meter","Kg"],c:0},
+{q:"Gravity pulls?",a:["Up","Down","Side","Away"],c:1},
+{q:"Light travels in?",a:["Curve","Straight line","Circle","Wave only"],c:1},
+{q:"Current unit?",a:["Ampere","Volt","Ohm","Watt"],c:0},
+{q:"Lens used for?",a:["Light","Sound","Heat","Mass"],c:0},
+{q:"Magnet attracts?",a:["Plastic","Iron","Wood","Glass"],c:1},
+{q:"Heat transfer?",a:["Conduction","Sound","Light","Force"],c:0},
+{q:"Work formula?",a:["F×D","F+D","F/D","D-F"],c:0}
+],
+
+Chemistry:[
+{q:"Water formula?",a:["H2O","CO2","O2","NaCl"],c:0},
+{q:"Oxygen symbol?",a:["O","Ox","Og","Om"],c:0},
+{q:"Salt is?",a:["NaCl","H2O","CO2","O2"],c:0},
+{q:"pH measures?",a:["Acidity","Weight","Speed","Mass"],c:0},
+{q:"Atom contains?",a:["Proton","Electron","Neutron","All"],c:3},
+{q:"Gas law relates?",a:["P,V,T","Speed","Mass","Time"],c:0},
+{q:"Metal is?",a:["Iron","Water","Air","Stone"],c:0},
+{q:"Acid taste?",a:["Sour","Sweet","Bitter","Salty"],c:0},
+{q:"Base feels?",a:["Soapy","Hard","Cold","Hot"],c:0},
+{q:"Chemical symbol for Gold?",a:["Au","Ag","Gd","Go"],c:0}
+],
+
+Civic:[
+{q:"Citizen means?",a:["Member of country","Visitor","Stranger","Alien"],c:0},
+{q:"Rights are?",a:["Privileges","Food","Money","Laws"],c:0},
+{q:"Voting is?",a:["Election process","War","Trade","Study"],c:0},
+{q:"Government protects?",a:["Citizens","Animals","Plants","Cars"],c:0},
+{q:"Duty means?",a:["Responsibility","Fun","Game","Money"],c:0},
+{q:"Law is made by?",a:["Government","School","Church","Market"],c:0},
+{q:"Corruption is?",a:["Dishonesty","Honesty","Work","Trade"],c:0},
+{q:"National symbol?",a:["Flag","Car","Book","House"],c:0},
+{q:"Security means?",a:["Safety","Danger","Fight","Loss"],c:0},
+{q:"Citizenship is?",a:["Belonging to country","School","Job","Game"],c:0}
+]
+};
+
+// ---------------- STATE ----------------
+let selectedSubjects=[];
+let currentQ=0;
+let timer=120*60;
+let answers={};
+
+// ---------------- SUBJECT SELECTION ----------------
+document.querySelectorAll('input[name="subj"]').forEach(cb=>{
+cb.onchange=()=>{
+selectedSubjects=[...document.querySelectorAll('input[name="subj"]:checked')].map(x=>x.value);
+if(selectedSubjects.length>3){
+alert("Select only 3 subjects");
+cb.checked=false;
+}
+}
+});
+
+function startExam(){
+if(selectedSubjects.length!==3){
+alert("Select exactly 3 subjects");
+return;
+}
+
+document.querySelector(".container").style.display="none";
+document.getElementById("examBox").style.display="block";
+
+startTimer();
+loadQuestion();
+}
+
+// ---------------- TIMER ----------------
+function startTimer(){
+setInterval(()=>{
+if(timer<=0){
+submitExam();
+return;
+}
+timer--;
+document.getElementById("timer").innerText=
+Math.floor(timer/60)+":"+("0"+timer%60).slice(-2);
+},1000);
+}
+
+// ---------------- QUESTIONS ----------------
+function getAllSubjects(){
+return ["English",...selectedSubjects];
+}
+
+function loadQuestion(){
+let all=getAllSubjects();
+let subject=all[Math.floor(currentQ/10)];
+let qIndex=currentQ%10;
+
+document.getElementById("subjectTitle").innerText=subject;
+
+let q=questionBank[subject][qIndex];
+
+document.getElementById("questionBox").innerHTML=`
+<h3>Q${currentQ+1}: ${q.q}</h3>
+${q.a.map((opt,i)=>`
+<div>
+<input type="radio" name="opt" onclick="answers[${currentQ}]=${i}">
+${opt}
+</div>
+`).join("")}
+`;
+}
+
+function nextQ(){
+if(currentQ<39){currentQ++;loadQuestion();}
+}
+function prevQ(){
+if(currentQ>0){currentQ--;loadQuestion();}
+}
+
+// ---------------- SUBMIT ----------------
+function submitExam(){
+let score=0;
+
+for(let i=0;i<40;i++){
+let subj=getAllSubjects()[Math.floor(i/10)];
+let q=questionBank[subj][i%10];
+if(answers[i]===q.c)score++;
+}
+
+let result=(score/40)*400;
+
+alert("Exam finished. Your score: "+result+"/400");
+location.reload();
+}
+</script>
+
+</body>
+  </html>
