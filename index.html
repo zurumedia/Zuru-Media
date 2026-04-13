@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Zuru Media - Premium creative agency for branding, websites, and digital design">
+<title>Zuru Media | Premium Creative Agency</title><link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1828/1828884.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"><style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;scroll-behavior:smooth}
+body{background:#F5E9DA;color:#2A2A2A;overflow-x:hidden}
+
+/* LOADER */
+#loader{position:fixed;width:100%;height:100vh;background:#800020;display:flex;align-items:center;justify-content:center;z-index:9999;color:white;font-size:32px;letter-spacing:4px;animation:fadeOut 1s ease 2.5s forwards}
+@keyframes fadeOut{to{opacity:0;visibility:hidden}}
+
+/* NAV */
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 8%;position:fixed;width:100%;top:0;background:#F5E9DA;border-bottom:1px solid rgba(0,0,0,0.05);z-index:999}
+nav h1{color:#800020}
+nav a{margin-left:20px;text-decoration:none;color:#2A2A2A;opacity:.7}
+nav a:hover{color:#800020}
+
+/* HERO */
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 8%;background:linear-gradient(to bottom,#F5E9DA,#EAD7C5)}
+.hero h2{font-size:42px}
+.hero span{color:#800020}
+.hero p{margin-top:15px;max-width:600px;opacity:.8}
+
+.typing{border-right:2px solid #800020;white-space:nowrap;overflow:hidden}
+
+.btn{margin-top:25px;padding:12px 25px;background:#800020;color:white;border:none;border-radius:10px;text-decoration:none;transition:.3s}
+.btn:hover{background:#5A0015;transform:scale(1.05)}
+
+section{padding:80px 8%}
+h3{font-size:28px;margin-bottom:20px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+
+.card{background:#fff;padding:20px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.08);opacity:0;transform:translateY(40px);transition:0.6s}
+.card.show{opacity:1;transform:translateY(0)}
+
+.portfolio img{width:100%;border-radius:12px}
+
+.testimonial{font-style:italic}
+
+input,textarea{width:100%;padding:10px;margin-top:10px;border-radius:8px;border:1px solid #ccc}
+
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;padding:15px;border-radius:50%;text-decoration:none}
+footer{text-align:center;padding:30px;opacity:.6}
+</style></head><body><div id="loader">ZURU MEDIA</div><nav>
+<h1>ZURU MEDIA</h1>
+<div>
+<a href="#about">About</a>
+<a href="#services">Services</a>
+<a href="#portfolio">Portfolio</a>
+<a href="#testimonials">Testimonials</a>
+<a href="#contact">Contact</a>
+</div>
+</nav><div class="hero">
+<h2 class="typing" id="typingText"></h2>
+<p>We turn small businesses into powerful premium brands.</p>
+<a class="btn" href="#contact">Get Started</a>
+</div><section id="about">
+<h3>About Us</h3>
+<div class="card">Zuru Media builds premium brands, websites, and digital visuals that attract clients instantly.</div>
+</section><section id="services">
+<h3>Services</h3>
+<div class="grid">
+<div class="card">Website Design</div>
+<div class="card">Brand Identity</div>
+<div class="card">Social Media Design</div>
+<div class="card">Business Flyers</div>
+</div>
+</section><section id="portfolio">
+<h3>Portfolio</h3>
+<div class="grid">
+<div class="card portfolio"><img loading="lazy" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"></div>
+<div class="card portfolio"><img loading="lazy" src="https://images.unsplash.com/photo-1492724441997-5dc865305da7"></div>
+<div class="card portfolio"><img loading="lazy" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c"></div>
+</div>
+</section><section id="testimonials">
+<h3>Testimonials</h3>
+<div class="grid">
+<div class="card testimonial">"Zuru Media transformed my business completely!"</div>
+<div class="card testimonial">"Top-notch design and professionalism."</div>
+</div>
+</section><section id="contact">
+<h3>Contact</h3>
+<div class="card">
+<form onsubmit="sendMessage(event)">
+<input type="text" id="name" placeholder="Your Name" required>
+<input type="email" id="email" placeholder="Your Email" required>
+<textarea id="message" rows="4" placeholder="Your Message"></textarea>
+<button class="btn" type="submit">Send Message</button>
+</form>
+<br>
+<p>📧 Email: <a href="mailto:chijindunicholasdestiny05@gmail.com" style="color:#800020">chijindunicholasdestiny05@gmail.com</a></p>
+<br>
+<a class="btn" href="https://wa.me/2348102407071">Chat on WhatsApp</a>
+</div>
+</section><a class="whatsapp" href="https://wa.me/2348102407071">💬</a>
+
+<footer>© 2026 Zuru Media</footer><script>
+
+// SCROLL ANIMATION
+const cards = document.querySelectorAll('.card');
+window.addEventListener('scroll', () => {
+cards.forEach(card => {
+if(card.getBoundingClientRect().top < window.innerHeight - 50){
+card.classList.add('show');
+}
+});
+});
+
+// TYPING EFFECT
+const text = "We Make Brands Look Premium";
+let i = 0;
+function typing(){
+if(i < text.length){
+document.getElementById("typingText").innerHTML += text.charAt(i);
+i++;
+setTimeout(typing, 50);
+}
+}
+typing();
+
+// CONTACT FORM (simple alert + WhatsApp redirect)
+function sendMessage(e){
+e.preventDefault();
+const name = document.getElementById('name').value;
+const message = document.getElementById('message').value;
+window.open(`https://wa.me/2348102407071?text=Hello, my name is ${name}. ${message}`,'_blank');
+}
+
+</script></body>
+                                                                                                                     </html>
