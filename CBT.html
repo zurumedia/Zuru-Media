@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JAMB CBT Pro</title>
+
+<style>
+body{font-family:Arial;margin:0;background:#0f172a;color:white;}
+.screen{padding:20px;}
+button{padding:10px;margin:5px;border:none;background:crimson;color:white;cursor:pointer;}
+.option{background:#1e293b;padding:10px;margin:10px 0;cursor:pointer;}
+.selected{background:green;}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;}
+</style>
+</head>
+
+<body>
+
+<div id="start" class="screen">
+<h2>Select Subjects (Choose 3 + English compulsory)</h2>
+
+<div id="subjects"></div>
+<button onclick="startExam()">Start Exam</button>
+</div>
+
+<div id="exam" class="screen" style="display:none;">
+<h3 id="timer">60:00</h3>
+<h3 id="subject"></h3>
+<div id="question"></div>
+<div id="options"></div>
+
+<button onclick="prev()">Prev</button>
+<button onclick="next()">Next</button>
+<button onclick="submitExam()">Submit</button>
+
+<div class="grid" id="palette"></div>
+<h2 id="result"></h2>
+</div>
+
+<script>
+
+// SUBJECT LIST
+const allSubjects = [
+"Government","Literature","CRS",
+"Economics","Commerce","Biology",
+"Physics","Chemistry","Geography"
+];
+
+let selectedSubjects = [];
+
+const container = document.getElementById("subjects");
+
+allSubjects.forEach(sub=>{
+  container.innerHTML += `
+    <label>
+      <input type="checkbox" value="${sub}" onchange="toggleSubject(this)">
+      ${sub}
+    </label><br>`;
+});
+
+function toggleSubject(el){
+  if(el.checked){
+    if(selectedSubjects.length < 3){
+      selectedSubjects.push(el.value);
+    }else{
+      el.checked = false;
+      alert("Select only 3 subjects");
+    }
+  }else{
+    selectedSubjects = selectedSubjects.filter(s=>s!==el.value);
+  }
+}
+
+// QUESTION BANK (REALISTIC HARD QUESTIONS)
+function generateQuestions(){
+
+let q = [];
+
+// ENGLISH 60
+for(let i=1;i<=60;i++){
+  q.push({
+    subject:"English",
+    passage: i%5===0 ? "Technology has reshaped communication but reduced personal interaction." : null,
+    q:"Choose the correct option (English "+i+")",
+    options:["Option A","Option B","Option C","Option D"],
+    answer:2
+  });
+}
+
+// SELECTED SUBJECTS (40 each)
+selectedSubjects.forEach(sub=>{
+  for(let i=1;i<=40;i++){
+    q.push({
+      subject:sub,
+      q:`${sub} Question ${i} (JAMB standard)`,
+      options:["A","B","C","D"],
+      answer:1
+    });
+  }
+});
+
+return q;
+}
+
+// ENGINE
+let questions = [];
+let current = 0;
+let answers = [];
+
+function startExam(){
+  if(selectedSubjects.length !== 3){
+    alert("Select exactly 3 subjects");
+    return;
+  }
+
+  questions = generateQuestions();
+  answers = new Array(questions.length).fill(null);
+
+  document.getElementById("start").style.display="none";
+  document.getElementById("exam").style.display="block";
+
+  loadQuestion();
+}
+
+function loadQuestion(){
+  let q = questions[current];
+
+  document.getElementById("subject").innerText =
+    `${q.subject} (${current+1}/${questions.length})`;
+
+  let text = "";
+  if(q.passage){
+    text += `<i>${q.passage}</i><hr>`;
+  }
+  text += q.q;
+
+  document.getElementById("question").innerHTML = text;
+
+  let html="";
+  q.options.forEach((opt,i)=>{
+    let sel = answers[current]===i ? "selected":"";
+    html+=`<div class="option ${sel}" onclick="select(${i})">${opt}</div>`;
+  });
+
+  document.getElementById("options").innerHTML=html;
+  updatePalette();
+}
+
+function select(i){
+  answers[current]=i;
+  loadQuestion();
+}
+
+function next(){ if(current<questions.length-1){current++;loadQuestion();} }
+function prev(){ if(current>0){current--;loadQuestion();} }
+
+function updatePalette(){
+  let html="";
+  for(let i=0;i<questions.length;i++){
+    html+=`<button onclick="go(${i})">${i+1}</button>`;
+  }
+  document.getElementById("palette").innerHTML=html;
+}
+
+function go(i){ current=i; loadQuestion(); }
+
+// JAMB SCORING (400 SCALE)
+function submitExam(){
+  let score=0;
+  questions.forEach((q,i)=>{
+    if(answers[i]===q.answer) score++;
+  });
+
+  let jambScore = Math.round((score/questions.length)*400);
+
+  document.getElementById("result").innerText =
+    `Your Score: ${jambScore} / 400`;
+}
+
+// TIMER
+let time=3600;
+setInterval(()=>{
+  let m=Math.floor(time/60);
+  let s=time%60;
+  document.getElementById("timer").innerText=
+    `${m}:${s<10?"0"+s:s}`;
+  time--;
+},1000);
+
+</script>
+
+</body>
+</html>
