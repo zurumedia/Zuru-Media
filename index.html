@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zuru Media | Premium Creative Agency</title>
+
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1828/1828884.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;scroll-behavior:smooth}
+body{overflow:hidden;background:#F5E9DA;color:#2A2A2A}
+
+/* LOADER */
+#loader{
+position:fixed;width:100%;height:100vh;background:#800020;
+display:flex;align-items:center;justify-content:center;
+z-index:9999;color:white;font-size:32px;
+animation:fadeOut 1s ease 2.5s forwards
+}
+@keyframes fadeOut{to{opacity:0;visibility:hidden}}
+
+/* NAV */
+nav{
+position:fixed;top:0;left:0;width:100%;
+display:flex;justify-content:space-between;align-items:center;
+padding:15px 6%;background:#F5E9DA;z-index:1000
+}
+nav h1{color:#800020}
+
+nav a{
+margin:0 10px;text-decoration:none;color:#333;cursor:pointer
+}
+nav a:hover{color:#800020}
+
+/* SEARCH */
+.search{
+padding:6px 10px;border:1px solid #ccc;border-radius:8px
+}
+
+/* PAGES WRAPPER */
+.pages{
+display:flex;width:500%;height:100vh;
+transition:transform 0.8s ease-in-out;
+margin-top:60px
+}
+
+.page{
+width:100vw;height:100vh;
+padding:60px 8%;
+overflow-y:auto
+}
+
+/* HERO */
+.hero{
+display:flex;flex-direction:column;justify-content:center;align-items:center;
+text-align:center;height:100%
+}
+.hero h2{font-size:40px}
+.hero span{color:#800020}
+
+.typing{border-right:2px solid #800020;white-space:nowrap;overflow:hidden}
+
+/* BUTTON */
+.btn{
+margin-top:20px;padding:12px 25px;
+background:#800020;color:white;border:none;border-radius:10px;
+cursor:pointer;text-decoration:none
+}
+.btn:hover{background:#5A0015}
+
+/* CARDS */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{
+background:white;padding:20px;border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+opacity:0;transform:translateY(30px);
+transition:0.6s
+}
+.card.show{opacity:1;transform:translateY(0)}
+
+/* WHATSAPP FLOAT */
+.whatsapp-float{
+position:fixed;bottom:25px;right:25px;
+width:60px;height:60px;
+background:linear-gradient(135deg,#25D366,#128C7E);
+border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+color:white;font-size:28px;
+z-index:2000;
+animation:pulse 1.8s infinite;
+cursor:pointer
+}
+@keyframes pulse{
+0%{box-shadow:0 0 0 0 rgba(37,211,102,0.5)}
+70%{box-shadow:0 0 0 15px rgba(37,211,102,0)}
+100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
+}
+
+/* WHATSAPP CHAT BOX */
+.chat-box{
+position:fixed;bottom:100px;right:25px;
+width:280px;background:white;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+overflow:hidden;
+display:none;
+z-index:2000
+}
+.chat-header{
+background:#25D366;color:white;padding:10px;
+font-weight:600
+}
+.chat-body{
+padding:10px;font-size:14px
+}
+.chat-footer{
+display:flex;border-top:1px solid #eee
+}
+.chat-footer input{
+flex:1;padding:10px;border:none;outline:none
+}
+.chat-footer button{
+background:#25D366;color:white;border:none;
+padding:10px;cursor:pointer
+}
+</style>
+</head>
+
+<body>
+
+<div id="loader">ZURU MEDIA</div>
+
+<!-- NAV -->
+<nav>
+<h1>ZURU</h1>
+
+<div>
+<a onclick="goTo(0)">Home</a>
+<a onclick="goTo(1)">About</a>
+<a onclick="goTo(2)">Services</a>
+<a onclick="goTo(3)">Portfolio</a>
+<a onclick="goTo(4)">Contact</a>
+</div>
+
+<input class="search" placeholder="Search page..." oninput="searchPage(this.value)">
+</nav>
+
+<!-- PAGES -->
+<div class="pages" id="pages">
+
+<!-- HOME -->
+<div class="page">
+<div class="hero">
+<h2 class="typing" id="typingText"></h2>
+<p>We turn small businesses into premium brands.</p>
+<a class="btn" onclick="goTo(4)">Get Started</a>
+</div>
+</div>
+
+<!-- ABOUT -->
+<div class="page">
+<h2>About Us</h2>
+<div class="card">We build premium branding and websites for modern businesses.</div>
+</div>
+
+<!-- SERVICES -->
+<div class="page">
+<h2>Services</h2>
+<div class="grid">
+<div class="card">Website Design</div>
+<div class="card">Brand Identity</div>
+<div class="card">Social Media Design</div>
+<div class="card">Business Flyers</div>
+</div>
+</div>
+
+<!-- PORTFOLIO -->
+<div class="page">
+<h2>Portfolio</h2>
+<div class="grid">
+<div class="card"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" width="100%"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" width="100%"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c" width="100%"></div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<div class="page">
+<h2>Contact</h2>
+<div class="card">
+<form onsubmit="sendMessage(event)">
+<input id="name" placeholder="Name" required><br><br>
+<textarea id="message" placeholder="Message"></textarea><br><br>
+<button class="btn">Send</button>
+</form>
+</div>
+</div>
+
+</div>
+
+<!-- FLOAT WHATSAPP -->
+<a class="whatsapp-float" onclick="toggleChat()">
+<i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- CHAT BOX -->
+<div class="chat-box" id="chatBox">
+<div class="chat-header">Zuru Media Support</div>
+<div class="chat-body">Hi 👋 How can we help you?</div>
+<div class="chat-footer">
+<input id="chatInput" placeholder="Type message...">
+<button onclick="sendChat()">Send</button>
+</div>
+</div>
+
+<script>
+
+/* PAGE NAV */
+let currentPage = 0;
+function goTo(page){
+currentPage = page;
+document.getElementById("pages").style.transform = `translateX(-${page*100}vw)`;
+}
+
+/* SEARCH */
+function searchPage(val){
+val = val.toLowerCase();
+if(val.includes("home")) goTo(0);
+if(val.includes("about")) goTo(1);
+if(val.includes("service")) goTo(2);
+if(val.includes("portfolio")) goTo(3);
+if(val.includes("contact")) goTo(4);
+}
+
+/* WHATSAPP CHAT */
+function toggleChat(){
+const box = document.getElementById("chatBox");
+box.style.display = box.style.display === "block" ? "none" : "block";
+}
+
+function sendChat(){
+const msg = document.getElementById("chatInput").value;
+window.open(`https://wa.me/2348102407071?text=${msg}`,'_blank');
+}
+
+/* CONTACT FORM */
+function sendMessage(e){
+e.preventDefault();
+const name = document.getElementById("name").value;
+const message = document.getElementById("message").value;
+window.open(`https://wa.me/2348102407071?text=Hi I'm ${name}. ${message}`);
+}
+
+/* TYPING */
+const text = "We Make Brands Look Premium";
+let i = 0;
+function typing(){
+if(i < text.length){
+document.getElementById("typingText").innerHTML += text.charAt(i);
+i++;
+setTimeout(typing, 50);
+}
+}
+typing();
+
+/* CARD ANIMATION */
+setInterval(()=>{
+document.querySelectorAll(".card").forEach(c=>{
+c.classList.add("show");
+});
+},500);
+
+/* AUTO PAGE LOAD */
+goTo(0);
+
+</script>
+
+</body>
+                                                                                 </html>
