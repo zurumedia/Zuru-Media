@@ -1,0 +1,211 @@
+<script>
+
+// ===== QUESTIONS ARRAY =====
+const questions = [
+
+/* ================= ENGLISH (60) ================= */
+{
+subject:"English",
+q:"Choose the word nearest in meaning to 'Loquacious'",
+options:["Talkative","Angry","Quiet","Proud"],
+answer:0
+},
+{
+subject:"English",
+q:"He kicked the bucket means:",
+options:["He died","He fell","He ran","He jumped"],
+answer:0
+},
+{
+subject:"English",
+q:"Identify the correct sentence:",
+options:[
+"She don't like rice",
+"She doesn't likes rice",
+"She doesn't like rice",
+"She not like rice"
+],
+answer:2
+},
+{
+subject:"English",
+q:"Opposite of 'Ubiquitous' is:",
+options:["Rare","Common","Frequent","Everywhere"],
+answer:0
+},
+{
+subject:"English",
+q:"Neither the teacher nor the students ___ present.",
+options:["is","are","was","be"],
+answer:1
+},
+
+// 🔁 AUTO-FILL REMAINING ENGLISH TO 60
+];
+
+while(questions.length < 60){
+  questions.push({
+    subject:"English",
+    q:"Advanced English: Choose the correct option.",
+    options:[
+      "Option A (Trap)",
+      "Option B (Close)",
+      "Option C (Correct)",
+      "Option D (Confusing)"
+    ],
+    answer:2
+  });
+}
+
+/* ================= GOVERNMENT (15) ================= */
+const gov = [
+{
+subject:"Government",
+q:"Who developed the theory of Separation of Powers?",
+options:["Montesquieu","Locke","Hobbes","Rousseau"],
+answer:0
+},
+{
+subject:"Government",
+q:"The rule of law was popularized by:",
+options:["A.V Dicey","Marx","Lenin","Plato"],
+answer:0
+}
+];
+
+while(gov.length < 15){
+  gov.push({
+    subject:"Government",
+    q:"Government advanced question (JAMB standard)",
+    options:["A","B","C","D"],
+    answer:1
+  });
+}
+
+questions.push(...gov);
+
+/* ================= LITERATURE (15) ================= */
+const lit = [
+{
+subject:"Literature",
+q:"Who wrote 'Things Fall Apart'?",
+options:["Chinua Achebe","Soyinka","Ngugi","Clark"],
+answer:0
+}
+];
+
+while(lit.length < 15){
+  lit.push({
+    subject:"Literature",
+    q:"Literature advanced question",
+    options:["A","B","C","D"],
+    answer:2
+  });
+}
+
+questions.push(...lit);
+
+/* ================= CRS (10) ================= */
+const crs = [
+{
+subject:"CRS",
+q:"Who led the Israelites out of Egypt?",
+options:["Moses","Aaron","Joshua","David"],
+answer:0
+}
+];
+
+while(crs.length < 10){
+  crs.push({
+    subject:"CRS",
+    q:"CRS advanced question",
+    options:["A","B","C","D"],
+    answer:0
+  });
+}
+
+questions.push(...crs);
+
+// ===== VARIABLES =====
+let current = 0;
+let answers = new Array(100).fill(null);
+
+// ===== LOAD =====
+function loadQuestion(){
+  let q = questions[current];
+
+  document.getElementById("subject").innerText =
+    `${q.subject} (${current+1}/100)`;
+
+  document.getElementById("question").innerText = q.q;
+
+  let html = "";
+  q.options.forEach((opt,i)=>{
+    let sel = answers[current]===i ? "selected":"";
+    html += `<div class="option ${sel}" onclick="select(${i})">${opt}</div>`;
+  });
+
+  document.getElementById("options").innerHTML = html;
+
+  updatePalette();
+}
+
+// ===== SELECT =====
+function select(i){
+  answers[current] = i;
+  loadQuestion();
+}
+
+// ===== NAV =====
+function next(){
+  if(current<99){ current++; loadQuestion(); }
+}
+function prev(){
+  if(current>0){ current--; loadQuestion(); }
+}
+
+// ===== PALETTE =====
+function updatePalette(){
+  let html = "";
+  for(let i=0;i<100;i++){
+    let cls = "";
+    if(i===current) cls="current";
+    else if(answers[i]!=null) cls="answered";
+
+    html += `<button class="${cls}" onclick="go(${i})">${i+1}</button>`;
+  }
+  document.getElementById("palette").innerHTML = html;
+}
+
+function go(i){
+  current = i;
+  loadQuestion();
+}
+
+// ===== SUBMIT =====
+function submitExam(){
+  let score = 0;
+  questions.forEach((q,i)=>{
+    if(answers[i]===q.answer) score+=4;
+  });
+
+  document.getElementById("result").innerText =
+    `Final Score: ${score} / 400`;
+}
+
+// ===== TIMER =====
+let time = 3600;
+
+setInterval(()=>{
+  let m = Math.floor(time/60);
+  let s = time%60;
+  document.getElementById("timer").innerText =
+    `${m}:${s<10?"0"+s:s}`;
+  time--;
+  if(time<0) submitExam();
+},1000);
+
+// START
+loadQuestion();
+
+</script>
