@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zuru Media | Premium Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+
+body{
+overflow:hidden;
+background:#F5E9DA;
+}
+
+/* NAV */
+nav{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:14px 6%;
+background:rgba(245,233,218,0.95);
+backdrop-filter:blur(12px);
+z-index:1000;
+border-bottom:1px solid rgba(0,0,0,0.08);
+}
+
+nav h1{
+color:#800020;
+font-size:22px;
+}
+
+nav a{
+margin:0 10px;
+cursor:pointer;
+text-decoration:none;
+font-weight:600;
+color:#333;
+font-size:15px;
+}
+
+nav a:hover{color:#800020}
+
+/* PAGES (STRICT SINGLE VIEW FIX) */
+.pages{
+display:flex;
+width:500%;
+height:100vh;
+transition:transform 0.85s ease-in-out;
+margin-top:65px;
+}
+
+.page{
+width:100vw;
+height:100vh;
+padding:80px 10%;
+overflow:hidden; /* IMPORTANT FIX: NO PAGE MIXING */
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+/* HEADINGS BIGGER */
+h2{
+color:#800020;
+font-size:32px;
+margin-bottom:20px;
+}
+
+/* TEXT BIGGER */
+p{
+font-size:16px;
+line-height:1.7;
+}
+
+/* HERO */
+.hero{
+text-align:center;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:18px;
+}
+
+.hero h1{
+font-size:54px;
+color:#800020;
+}
+
+.hero p{
+max-width:750px;
+font-size:17px;
+opacity:0.85;
+}
+
+/* BUTTON */
+.btn{
+background:#800020;
+color:white;
+padding:13px 28px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-size:15px;
+font-weight:600;
+transition:0.3s;
+}
+.btn:hover{transform:scale(1.05);background:#5a0015}
+
+/* GRID FIX */
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+margin-top:20px;
+}
+
+/* CARDS */
+.card{
+background:white;
+padding:22px;
+border-radius:16px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+font-size:15px;
+transition:0.3s;
+}
+
+.card:hover{transform:translateY(-5px)}
+
+/* BOLD TESTIMONIALS */
+.testimonial{
+font-weight:700;
+font-size:15px;
+}
+
+/* PORTFOLIO IMAGE */
+.card img{
+width:100%;
+border-radius:12px;
+}
+
+/* CONTACT FIXED INSIDE BOX */
+input,textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:10px;
+border:1px solid #ccc;
+font-size:14px;
+}
+
+/* WHATSAPP FLOAT FIXED */
+.whatsapp-float{
+position:fixed;
+bottom:25px;
+right:25px;
+width:65px;
+height:65px;
+background:linear-gradient(135deg,#25D366,#128C7E);
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+color:white;
+cursor:pointer;
+z-index:2000;
+animation:pulse 1.8s infinite;
+}
+
+@keyframes pulse{
+0%{box-shadow:0 0 0 0 rgba(37,211,102,0.5)}
+70%{box-shadow:0 0 0 18px rgba(37,211,102,0)}
+100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
+}
+
+/* CHAT */
+.chat{
+position:fixed;
+bottom:100px;
+right:25px;
+width:320px;
+background:white;
+border-radius:16px;
+display:none;
+overflow:hidden;
+z-index:2000;
+box-shadow:0 15px 40px rgba(0,0,0,0.25);
+}
+
+.chat-header{
+background:#800020;
+color:white;
+padding:10px;
+font-weight:600;
+}
+
+.chat-body{
+padding:10px;
+font-size:14px;
+height:130px;
+}
+
+.chat-input{
+display:flex;
+border-top:1px solid #eee;
+}
+
+.chat-input input{
+flex:1;
+padding:10px;
+border:none;
+outline:none;
+}
+
+.chat-input button{
+background:#25D366;
+border:none;
+color:white;
+padding:10px;
+cursor:pointer;
+}
+
+/* LOGO IMAGE STYLE */
+.logo{
+width:120px;
+margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+<h1>ZURU MEDIA</h1>
+
+<div>
+<a onclick="go(0)">Home</a>
+<a onclick="go(1)">About</a>
+<a onclick="go(2)">Services</a>
+<a onclick="go(3)">Portfolio</a>
+<a onclick="go(4)">Contact</a>
+</div>
+</nav>
+
+<!-- PAGES -->
+<div class="pages" id="pages">
+
+<!-- HOME -->
+<div class="page">
+<div class="hero">
+<h1>We Build Premium Brands</h1>
+<p>Zuru Media is a creative agency focused on building powerful digital identities, modern websites, and high-converting brand designs.</p>
+<button class="btn" onclick="go(4)">Start Your Project</button>
+</div>
+</div>
+
+<!-- ABOUT (LONG MESSAGE STYLE) -->
+<div class="page">
+<h2>About Zuru Media</h2>
+
+<div class="card" style="font-size:16px;line-height:1.9">
+Zuru Media is a premium digital creative agency built with one mission — to transform ordinary businesses into powerful, modern, and visually attractive brands.
+
+We specialize in website development, branding identity, social media design, advertising creatives, and full digital transformation systems.
+
+Our approach is simple:
+We don’t just design — we build experiences that make your business look professional, trustworthy, and premium.
+
+Every project we handle is crafted with attention to detail, modern aesthetics, and strategic thinking to ensure your business stands out in the digital world.
+
+We believe design is not decoration — it is communication, identity, and power.
+</div>
+</div>
+
+<!-- SERVICES + TESTIMONIALS -->
+<div class="page">
+<h2>Services</h2>
+
+<div class="grid">
+<div class="card">Website Design & Development</div>
+<div class="card">Brand Identity Creation</div>
+<div class="card">Social Media Branding</div>
+<div class="card">Business Flyers & Ads</div>
+<div class="card">UI/UX Design</div>
+<div class="card">Marketing Strategy</div>
+</div>
+
+<br><br>
+
+<h2>Testimonials</h2>
+
+<div class="grid">
+<div class="card testimonial">“Zuru Media changed my business completely. Very professional.”</div>
+<div class="card testimonial">“My brand now looks like a global company.”</div>
+<div class="card testimonial">“Fast, clean, and premium designs.”</div>
+</div>
+</div>
+
+<!-- PORTFOLIO -->
+<div class="page">
+<h2>Portfolio</h2>
+
+<div class="grid">
+<div class="card"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1559028012-481c04fa702d"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1551434678-e076c223a692"></div>
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png">
+<p style="text-align:center;margin-top:10px;font-weight:600">ZURU MEDIA LOGO</p>
+</div>
+
+</div>
+</div>
+
+<!-- CONTACT (FIXED INSIDE BOX) -->
+<div class="page">
+<h2>Contact Us</h2>
+
+<div class="card">
+<p><b>Email:</b> chijindunicholasdestiny05@gmail.com</p>
+<p><b>WhatsApp:</b> 0810240701</p>
+
+<br>
+
+<input id="name" placeholder="Your Name">
+<textarea id="msg" placeholder="Your Message"></textarea>
+
+<br><br>
+<button class="btn" onclick="send()">Send via WhatsApp</button>
+</div>
+</div>
+
+</div>
+
+<!-- FLOAT WHATSAPP -->
+<div class="whatsapp-float" onclick="toggleChat()">
+<i class="fab fa-whatsapp"></i>
+</div>
+
+<!-- CHAT -->
+<div class="chat" id="chat">
+<div class="chat-header">Zuru Media Support</div>
+<div class="chat-body">Hello 👋 Send us a message</div>
+
+<div class="chat-input">
+<input id="chatmsg" placeholder="Type message">
+<button onclick="sendChat()">Send</button>
+</div>
+</div>
+
+<script>
+
+let page=0;
+function go(i){
+page=i;
+document.getElementById("pages").style.transform=`translateX(-${i*100}vw)`;
+}
+
+function toggleChat(){
+let c=document.getElementById("chat");
+c.style.display=c.style.display==="block"?"none":"block";
+}
+
+function sendChat(){
+let m=document.getElementById("chatmsg").value;
+window.open(`https://wa.me/234810240701?text=${encodeURIComponent(m)}`,'_blank');
+}
+
+function send(){
+let n=document.getElementById("name").value;
+let m=document.getElementById("msg").value;
+window.open(`https://wa.me/234810240701?text=Hi I'm ${n}. ${m}`);
+}
+
+</script>
+
+</body>
+  </html>
