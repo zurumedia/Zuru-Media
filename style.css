@@ -4,3 +4,34 @@
   right: 20px;
   z-index: 999;
 }
+.cbt-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 999px; /* macaron / pill shape */
+  background: linear-gradient(135deg, #7f1d1d, #be123c); /* deep wine → matches your theme */
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  font-family: inherit; /* uses your site's font */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.cbt-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.6);
+}
+
+/* Glow pulse (makes it VERY visible) */
+.cbt-btn {
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 rgba(190,18,60,0.6); }
+  50% { box-shadow: 0 0 20px rgba(190,18,60,0.9); }
+  100% { box-shadow: 0 0 0 rgba(190,18,60,0.6); }
+}
