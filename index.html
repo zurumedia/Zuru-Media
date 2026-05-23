@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zuru Media — Elite Studio</title>
+
+<style>
+:root{
+  --bg:#1d1512;
+  --panel:#261c18;
+  --card:#2f221d;
+  --text:#f7f3f0;
+  --muted:#cdbbb2;
+  --accent:#b07a5a;
+  --accent2:#e7c2aa;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Segoe UI, sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* ================= INTRO ================= */
+#intro{
+  position:fixed;
+  inset:0;
+  background:var(--bg);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  animation:fadeOut 2.5s ease forwards;
+  animation-delay:2s;
+}
+
+#intro h1{
+  font-size:60px;
+  letter-spacing:6px;
+  color:var(--accent2);
+}
+
+#intro p{
+  color:var(--muted);
+  margin-top:10px;
+}
+
+@keyframes fadeOut{
+  to{opacity:0; visibility:hidden;}
+}
+
+/* ================= HEADER ================= */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:20px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(29,21,18,0.85);
+  backdrop-filter:blur(12px);
+  z-index:1000;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:3px;
+  color:var(--accent2);
+}
+
+nav a{
+  margin:0 15px;
+  text-decoration:none;
+  color:var(--muted);
+  font-size:15px;
+  cursor:pointer;
+  position:relative;
+}
+
+nav a.active,
+nav a:hover{
+  color:var(--accent2);
+}
+
+nav a.active::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  width:100%;
+  height:2px;
+  background:var(--accent);
+}
+
+/* ================= PAGES ================= */
+.page{
+  display:none;
+  padding:140px 80px 80px;
+  min-height:100vh;
+  animation:fade .6s ease;
+}
+
+.active{display:block;}
+
+@keyframes fade{
+  from{opacity:0; transform:translateY(25px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* ================= AOS STYLE ================= */
+.aos{
+  opacity:0;
+  transform:translateY(30px);
+  transition:all .8s ease;
+}
+.aos.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ================= BUTTONS ================= */
+.btn{
+  margin-top:25px;
+  padding:13px 24px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:600;
+  margin-right:10px;
+  transition:.3s;
+}
+
+.btn-primary{
+  background:var(--accent);
+  color:white;
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
+}
+
+.btn-outline{
+  border:1px solid var(--accent2);
+  background:transparent;
+  color:var(--accent2);
+}
+
+/* ================= HERO ================= */
+.hero{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:40px;
+}
+
+/* WhatsApp Floating (IMPROVED) */
+.whatsapp{
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  background:#25D366;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 25px rgba(0,0,0,0.4);
+  z-index:500;
+  animation:pulse 2s infinite;
+  transition:.3s;
+}
+
+.whatsapp:hover{
+  transform:scale(1.15);
+}
+
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(37,211,102,0.5);}
+  70%{box-shadow:0 0 0 15px rgba(37,211,102,0);}
+  100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:900px){
+  .hero{flex-direction:column;}
+  .page{padding:120px 25px;}
+  header{padding:15px 20px;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+  <h1>ZURU MEDIA</h1>
+  <p>Creative Studio • Branding • Web • Design</p>
+</div>
+
+<header>
+  <div class="logo">ZURU MEDIA</div>
+  <nav>
+    <a onclick="go('home')" class="active">Home</a>
+    <a onclick="go('about')">About</a>
+    <a onclick="go('services')">Services</a>
+    <a onclick="go('portfolio')">Portfolio</a>
+    <a onclick="go('contact')">Contact</a>
+  </nav>
+</header>
+
+<!-- HOME -->
+<div class="page active" id="home">
+  <div class="hero aos">
+
+    <div>
+      <h1>We Build Brands That Feel Alive</h1>
+      <p>Design • Strategy • Identity • Development</p>
+
+      <button class="btn btn-primary" onclick="go('portfolio')">Explore Portfolio</button>
+      <button class="btn btn-outline" onclick="go('contact')">Get In Touch</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="contact">
+  <h2 class="aos">Get In Touch</h2>
+
+  <input type="text" id="name" placeholder="Your Name">
+  <input type="email" id="email" placeholder="Email Address">
+  <textarea id="message" placeholder="Your Message"></textarea>
+
+  <button class="btn btn-primary" onclick="sendMessage()">Send Message</button>
+</div>
+
+<footer>
+  © 2026 Zuru Media
+</footer>
+
+<!-- WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/2348102407071" target="_blank">
+  <svg width="30" height="30" fill="white" viewBox="0 0 24 24">
+    <path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.7-2-.2-.3 0-.5.1-.7.1-.1.3-.4.4-.6.1-.2.1-.3 0-.5-.1-.2-.7-1.7-.9-2.3-.2-.6-.4-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.3 3.1c.2.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.8.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 2-1.3.2-.6.2-1.2.1-1.3-.1-.2-.3-.3-.6-.4z"/>
+  </svg>
+</a>
+
+<script>
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+
+  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+  event.target.classList.add('active');
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* SIMPLE AOS */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('show');
+    }
+  });
+});
+
+document.querySelectorAll('.aos').forEach(el=>{
+  observer.observe(el);
+});
+
+/* FORM -> EMAIL */
+function sendMessage(){
+  const n = document.getElementById('name').value;
+  const e = document.getElementById('email').value;
+  const m = document.getElementById('message').value;
+
+  window.location.href =
+  `mailto:hello@zurumedia.com?subject=New%20Message%20from%20${n}&body=${m}%0A%0AFrom:%20${e}`;
+}
+</script>
+
+</body>
+  </html>
