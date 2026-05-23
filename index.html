@@ -1,0 +1,660 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>Zuru Media — Elite Studio</title>  <style>  
+:root{  
+  --bg:#1d1512;  
+  --panel:#261c18;  
+  --card:#2f221d;  
+  --text:#f7f3f0;  
+  --muted:#cdbbb2;  
+  --accent:#b07a5a;  
+  --accent2:#e7c2aa;  
+}  
+  
+*{  
+  margin:0;  
+  padding:0;  
+  box-sizing:border-box;  
+  font-family:Segoe UI, sans-serif;  
+}  
+  
+body{  
+  background:var(--bg);  
+  color:var(--text);  
+  overflow-x:hidden;  
+}  
+  
+/* ================= INTRO ================= */  
+#intro{  
+  position:fixed;  
+  inset:0;  
+  background:var(--bg);  
+  display:flex;  
+  flex-direction:column;  
+  justify-content:center;  
+  align-items:center;  
+  z-index:9999;  
+  animation:fadeOut 2.5s ease forwards;  
+  animation-delay:2s;  
+}  
+  
+#intro h1{  
+  font-size:60px;  
+  letter-spacing:6px;  
+  color:var(--accent2);  
+}  
+  
+#intro p{  
+  color:var(--muted);  
+  margin-top:10px;  
+}  
+  
+@keyframes fadeOut{  
+  to{opacity:0; visibility:hidden;}  
+}  
+  
+/* ================= HEADER ================= */  
+header{  
+  position:fixed;  
+  top:0;  
+  width:100%;  
+  padding:20px 60px;  
+  display:flex;  
+  justify-content:space-between;  
+  align-items:center;  
+  background:rgba(29,21,18,0.85);  
+  backdrop-filter:blur(12px);  
+  z-index:1000;  
+}  
+  
+.logo{  
+  font-size:22px;  
+  font-weight:700;  
+  letter-spacing:3px;  
+  color:var(--accent2);  
+}  
+  
+nav a{  
+  margin:0 15px;  
+  text-decoration:none;  
+  color:var(--muted);  
+  font-size:15px;  
+  cursor:pointer;  
+}  
+  
+nav a:hover{  
+  color:var(--accent2);  
+}  
+  
+/* ================= PAGES ================= */  
+.page{  
+  display:none;  
+  padding:140px 80px 80px;  
+  min-height:100vh;  
+  animation:fade .6s ease;  
+}  
+  
+.active{display:block;}  
+  
+@keyframes fade{  
+  from{opacity:0; transform:translateY(25px);}  
+  to{opacity:1; transform:translateY(0);}  
+}  
+  
+/* ================= HOME ================= */  
+.hero{  
+  display:flex;  
+  justify-content:space-between;  
+  align-items:center;  
+  gap:40px;  
+}  
+  
+.hero-text{  
+  width:45%;  
+}  
+  
+.hero-text h1{  
+  font-size:64px;  
+  line-height:1.1;  
+}  
+  
+.hero-text p{  
+  font-size:18px;  
+  color:var(--muted);  
+  margin-top:15px;  
+}  
+  
+.hero-text .desc{  
+  margin-top:25px;  
+  line-height:1.8;  
+  font-size:15px;  
+}  
+  
+/* RIGHT SLIDER */  
+.slider{  
+  width:55%;  
+  overflow:hidden;  
+  border-radius:16px;  
+  position:relative;  
+}  
+  
+.slides{  
+  display:flex;  
+  width:300%;  
+  animation:slide 10s infinite;  
+}  
+  
+.slides img{  
+  width:33.333%;  
+  height:420px;  
+  object-fit:cover;  
+}  
+  
+/* Placeholder slides using gradient blocks */  
+.slide-placeholder{  
+  width:33.333%;  
+  height:420px;  
+  flex-shrink:0;  
+}  
+  
+@keyframes slide{  
+  0%  {transform:translateX(0);}  
+  33% {transform:translateX(-33.333%);}  
+  66% {transform:translateX(-66.666%);}  
+  100%{transform:translateX(0);}  
+}  
+  
+/* BUTTONS */  
+.btn{  
+  margin-top:25px;  
+  padding:13px 24px;  
+  border:none;  
+  border-radius:10px;  
+  cursor:pointer;  
+  font-size:15px;  
+  font-weight:600;  
+  margin-right:10px;  
+  transition:.3s;  
+}  
+  
+.btn-primary{  
+  background:var(--accent);  
+  color:white;  
+}  
+  
+.btn-primary:hover{  
+  background:#c98a68;  
+}  
+  
+.btn-outline{  
+  border:1px solid var(--accent2);  
+  background:transparent;  
+  color:var(--accent2);  
+}  
+  
+.btn-outline:hover{  
+  background:var(--accent2);  
+  color:var(--bg);  
+}  
+  
+/* ================= STATS ================= */  
+.stats{  
+  display:flex;  
+  gap:40px;  
+  margin-top:60px;  
+  padding-top:40px;  
+  border-top:1px solid rgba(255,255,255,0.08);  
+}  
+  
+.stat h2{  
+  font-size:36px;  
+  color:var(--accent2);  
+}  
+  
+.stat p{  
+  font-size:13px;  
+  color:var(--muted);  
+  margin-top:4px;  
+}  
+  
+/* ================= SECTION TITLES ================= */  
+.section-title{  
+  font-size:38px;  
+  margin-bottom:10px;  
+}  
+  
+.section-sub{  
+  color:var(--muted);  
+  margin-bottom:40px;  
+  font-size:15px;  
+}  
+  
+/* ================= GRID ================= */  
+.grid{  
+  display:grid;  
+  grid-template-columns:repeat(3,1fr);  
+  gap:20px;  
+}  
+  
+/* CARDS */  
+.card{  
+  background:var(--card);  
+  padding:20px;  
+  border-radius:14px;  
+  transition:.3s;  
+  border:1px solid rgba(255,255,255,0.05);  
+}  
+  
+.card:hover{  
+  transform:translateY(-8px);  
+  border-color:var(--accent);  
+}  
+  
+.card-icon{  
+  font-size:32px;  
+  margin-bottom:14px;  
+}  
+  
+.card h3{  
+  font-size:18px;  
+  margin-bottom:8px;  
+  color:var(--accent2);  
+}  
+  
+.card p{  
+  font-size:14px;  
+  color:var(--muted);  
+  line-height:1.7;  
+}  
+  
+/* PORTFOLIO */  
+.card img{  
+  width:100%;  
+  height:200px;  
+  object-fit:cover;  
+  border-radius:10px;  
+  margin-bottom:14px;  
+}  
+  
+.portfolio-placeholder{  
+  width:100%;  
+  height:200px;  
+  border-radius:10px;  
+  margin-bottom:14px;  
+}  
+  
+.tag{  
+  display:inline-block;  
+  font-size:11px;  
+  padding:4px 10px;  
+  border-radius:20px;  
+  background:rgba(176,122,90,0.2);  
+  color:var(--accent2);  
+  margin-bottom:8px;  
+}  
+  
+/* ================= ABOUT ================= */  
+.about-grid{  
+  display:grid;  
+  grid-template-columns:1fr 1fr;  
+  gap:60px;  
+  align-items:center;  
+}  
+  
+.about-text{  
+  font-size:16px;  
+  line-height:2;  
+  color:var(--muted);  
+}  
+  
+.about-text h2{  
+  font-size:36px;  
+  color:var(--text);  
+  margin-bottom:20px;  
+}  
+  
+.about-values{  
+  display:grid;  
+  grid-template-columns:1fr 1fr;  
+  gap:16px;  
+  margin-top:30px;  
+}  
+  
+.value-item{  
+  background:var(--card);  
+  padding:16px;  
+  border-radius:12px;  
+  border-left:3px solid var(--accent);  
+}  
+  
+.value-item h4{  
+  color:var(--accent2);  
+  margin-bottom:4px;  
+}  
+  
+.value-item p{  
+  font-size:13px;  
+  color:var(--muted);  
+}  
+  
+.team-card{  
+  background:var(--card);  
+  border-radius:14px;  
+  overflow:hidden;  
+  text-align:center;  
+  padding-bottom:20px;  
+  border:1px solid rgba(255,255,255,0.05);  
+}  
+  
+.team-avatar{  
+  width:100%;  
+  height:220px;  
+  display:flex;  
+  align-items:center;  
+  justify-content:center;  
+  font-size:60px;  
+  background:linear-gradient(135deg, #2f221d, #3d2a23);  
+  margin-bottom:16px;  
+}  
+  
+.team-card h4{  
+  font-size:16px;  
+  color:var(--accent2);  
+}  
+  
+.team-card p{  
+  font-size:13px;  
+  color:var(--muted);  
+  margin-top:4px;  
+}  
+  
+/* ================= CONTACT ================= */  
+.contact-grid{  
+  display:grid;  
+  grid-template-columns:1fr 1fr;  
+  gap:60px;  
+}  
+  
+.contact-info h3{  
+  font-size:22px;  
+  color:var(--accent2);  
+  margin-bottom:20px;  
+}  
+  
+.contact-item{  
+  display:flex;  
+  align-items:center;  
+  gap:14px;  
+  margin-bottom:20px;  
+  font-size:15px;  
+  color:var(--muted);  
+}  
+  
+.contact-item span:first-child{  
+  font-size:22px;  
+}  
+  
+input, textarea{  
+  width:100%;  
+  padding:16px;  
+  margin:8px 0;  
+  border-radius:10px;  
+  background:var(--panel);  
+  border:1px solid rgba(255,255,255,0.08);  
+  color:white;  
+  font-size:15px;  
+  outline:none;  
+  transition:.3s;  
+}  
+  
+input:focus, textarea:focus{  
+  border-color:var(--accent);  
+}  
+  
+textarea{  
+  resize:vertical;  
+  min-height:140px;  
+}  
+  
+/* ================= FOOTER ================= */  
+footer{  
+  text-align:center;  
+  padding:30px;  
+  color:var(--muted);  
+  font-size:13px;  
+  border-top:1px solid rgba(255,255,255,0.06);  
+  margin-top:40px;  
+}  
+  
+/* ================= WHATSAPP ================= */  
+.whatsapp{  
+  position:fixed;  
+  bottom:25px;  
+  right:25px;  
+  width:65px;  
+  height:65px;  
+  border-radius:50%;  
+  background:#25D366;  
+  display:flex;  
+  align-items:center;  
+  justify-content:center;  
+  font-size:30px;  
+  box-shadow:0 10px 25px rgba(0,0,0,0.4);  
+  text-decoration:none;  
+  transition:0.3s;  
+  z-index:500;  
+}  
+  
+.whatsapp:hover{  
+  transform:scale(1.1);  
+}  
+  
+/* ================= RESPONSIVE ================= */  
+@media(max-width:900px){  
+  .hero{flex-direction:column;}  
+  .hero-text, .slider{width:100%;}  
+  .hero-text h1{font-size:40px;}  
+  .grid{grid-template-columns:1fr 1fr;}  
+  .about-grid, .contact-grid{grid-template-columns:1fr;}  
+  .page{padding:120px 30px 60px;}  
+  header{padding:18px 24px;}  
+}  
+  
+@media(max-width:600px){  
+  .grid{grid-template-columns:1fr;}  
+  .stats{flex-wrap:wrap; gap:24px;}  
+  .about-values{grid-template-columns:1fr;}  
+}  
+</style>  </head>  <body>  <!-- INTRO -->  <div id="intro">  
+  <h1>ZURU MEDIA</h1>  
+  <p>Creative Studio • Branding • Web • Design</p>  
+</div>  <!-- HEADER -->  <header>  
+  <div class="logo">ZURU MEDIA</div>  
+  <nav>  
+    <a onclick="go('home')">Home</a>  
+    <a onclick="go('about')">About</a>  
+    <a onclick="go('services')">Services</a>  
+    <a onclick="go('portfolio')">Portfolio</a>  
+    <a onclick="go('contact')">Contact</a>  
+  </nav>  
+</header>  <!-- ==================== HOME ==================== -->  <div class="page active" id="home">  
+  <div class="hero">  <div class="hero-text">  
+  <h1>We Build Brands That Feel Alive</h1>  
+  <p>Design • Strategy • Identity • Development</p>  
+  <div class="desc">  
+    Zuru Media is a creative agency focused on building premium visual identities,  
+    powerful digital experiences, and modern brands that stand out in competitive markets.  
+    We combine storytelling with design systems to create unforgettable brands.  
+  </div>  
+  <button class="btn btn-primary" onclick="go('portfolio')">Explore Portfolio</button>  
+  <button class="btn btn-outline" onclick="go('contact')">Get In Touch</button>  
+</div>  
+
+<!-- IMAGE SLIDER -->  
+<div class="slider">  
+  <div class="slides">  
+    <div class="slide-placeholder" style="background:linear-gradient(135deg,#3d2318,#7a4a2e);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--accent2);letter-spacing:2px;">BRANDING</div>  
+    <div class="slide-placeholder" style="background:linear-gradient(135deg,#1a2a3a,#2e4a6a);display:flex;align-items:center;justify-content:center;font-size:18px;color:#a0c4e8;letter-spacing:2px;">WEB DESIGN</div>  
+    <div class="slide-placeholder" style="background:linear-gradient(135deg,#1e2d1e,#3a5c3a);display:flex;align-items:center;justify-content:center;font-size:18px;color:#a8d5a2;letter-spacing:2px;">IDENTITY</div>  
+  </div>  
+</div>
+
+  </div>    <!-- STATS -->    <div class="stats">  
+    <div class="stat"><h2>120+</h2><p>Projects Delivered</p></div>  
+    <div class="stat"><h2>85+</h2><p>Happy Clients</p></div>  
+    <div class="stat"><h2>6+</h2><p>Years of Experience</p></div>  
+    <div class="stat"><h2>12</h2><p>Industry Awards</p></div>  
+  </div>  
+</div>  <!-- ==================== ABOUT ==================== -->  <div class="page" id="about">  
+  <h2 class="section-title">About Zuru Media</h2>  
+  <p class="section-sub">Who we are and what drives us</p>    <div class="about-grid">  
+    <div class="about-text">  
+      <h2>A Studio Built on Bold Ideas</h2>  
+      <p>  
+        Founded with a passion for purposeful design, Zuru Media has grown into a full-service  
+        creative studio trusted by startups, established businesses, and personal brands alike.  
+        We believe great design isn't decoration — it's communication.  
+      </p>  
+      <p style="margin-top:16px;">  
+        Our team of designers, strategists, and developers work in close collaboration to deliver  
+        cohesive brand systems that are both beautiful and functional. Every project starts with  
+        listening, understanding your vision, and translating it into something the world will remember.  
+      </p>  <div class="about-values">  
+    <div class="value-item"><h4>🎯 Purpose-Led</h4><p>Every decision tied to your goal.</p></div>  
+    <div class="value-item"><h4>✦ Premium Quality</h4><p>No shortcuts, ever.</p></div>  
+    <div class="value-item"><h4>🤝 Collaborative</h4><p>You're part of the process.</p></div>  
+    <div class="value-item"><h4>⚡ Fast Delivery</h4><p>Timelines we actually keep.</p></div>  
+  </div>  
+</div>  
+
+<!-- TEAM -->  
+<div>  
+  <div class="grid" style="grid-template-columns:1fr 1fr;">  
+    <div class="team-card">  
+      <div class="team-avatar">👤</div>  
+      <h4>Nicholas Chijindu Destiny Onyekaozuru</h4>  
+      <p>Founder & Creative Director</p>  
+    </div>  
+    <div class="team-card">  
+      <div class="team-avatar">👤</div>  
+      <h4>Maya Osai</h4>  
+      <p>Lead Brand Strategist</p>  
+    </div>  
+    <div class="team-card">  
+      <div class="team-avatar">👤</div>  
+      <h4>Joe Godson</h4>  
+      <p>UI / UX Designer</p>  
+    </div>  
+    <div class="team-card">  
+      <div class="team-avatar">👤</div>  
+      <h4>Destiny Nicholas</h4>  
+      <p>Web Developer</p>  
+    </div>  
+  </div>  
+</div>
+
+  </div>  
+</div>  <!-- ==================== SERVICES ==================== -->  <div class="page" id="services">  
+  <h2 class="section-title">Our Services</h2>  
+  <p class="section-sub">Everything you need to build and grow your brand</p>    <div class="grid">  
+    <div class="card">  
+      <div class="card-icon">🎨</div>  
+      <h3>Brand Identity</h3>  
+      <p>Logo design, colour systems, typography, brand guidelines, and full visual identity packages crafted to make you instantly recognisable.</p>  
+    </div>  
+    <div class="card">  
+      <div class="card-icon">💻</div>  
+      <h3>Web Design & Dev</h3>  
+      <p>Custom websites and landing pages that are fast, responsive, and conversion-optimised — built from scratch or on modern platforms.</p>  
+    </div>  
+    <div class="card">  
+      <div class="card-icon">📱</div>  
+      <h3>Social Media Design</h3>  
+      <p>Scroll-stopping content templates, profile branding, and campaign visuals that keep your social presence consistent and compelling.</p>  
+    </div>  
+    <div class="card">  
+      <div class="card-icon">📦</div>  
+      <h3>Packaging Design</h3>  
+      <p>Product packaging that stands out on shelves and online — from concept sketches to print-ready files with supplier coordination.</p>  
+    </div>  
+    <div class="card">  
+      <div class="card-icon">🎬</div>  
+      <h3>Motion & Video</h3>  
+      <p>Animated logos, explainer videos, social reels, and brand films that bring your story to life with polish and energy.</p>  
+    </div>  
+    <div class="card">  
+      <div class="card-icon">📈</div>  
+      <h3>Brand Strategy</h3>  
+      <p>Positioning, tone of voice, audience research, and competitive analysis — the strategic foundation every great brand is built on.</p>  
+    </div>  
+  </div>  
+</div>  <!-- ==================== PORTFOLIO ==================== -->  <div class="page" id="portfolio">  
+  <h2 class="section-title">Our Work</h2>  
+  <p class="section-sub">Selected projects from our studio</p>    <div class="grid">  
+    <div class="card">  
+      <div class="portfolio-placeholder" style="background:linear-gradient(135deg,#3d2318,#7a4a2e);display:flex;align-items:center;justify-content:center;font-size:30px;">🏷️</div>  
+      <span class="tag">Branding</span>  
+      <h3>Kova Coffee Co.</h3>  
+      <p style="font-size:14px;color:var(--muted);">Full brand identity, packaging, and web presence for an artisan coffee roastery.</p>  
+    </div>  
+    <div class="card">  
+      <div class="portfolio-placeholder" style="background:linear-gradient(135deg,#1a2a3a,#2e4a6a);display:flex;align-items:center;justify-content:center;font-size:30px;">💻</div>  
+      <span class="tag">Web Design</span>  
+      <h3>Nexus Architecture</h3>  
+      <p style="font-size:14px;color:var(--muted);">Minimal, award-winning website for a modern architecture and interiors firm.</p>  
+    </div>  
+    <div class="card">  
+      <div class="portfolio-placeholder" style="background:linear-gradient(135deg,#2a1a3a,#5a2e6a);display:flex;align-items:center;justify-content:center;font-size:30px;">📦</div>  
+      <span class="tag">Packaging</span>  
+      <h3>Lumé Skincare</h3>  
+      <p style="font-size:14px;color:var(--muted);">Luxury packaging system and brand identity for a premium skincare launch.</p>  
+    </div>  
+    <div class="card">  
+      <div class="portfolio-placeholder" style="background:linear-gradient(135deg,#1e2d1e,#3a5c3a);display:flex;align-items:center;justify-content:center;font-size:30px;">📱</div>  
+      <span class="tag">Social Media</span>  
+      <h3>Verde Restaurant</h3>  
+      <p style="font-size:14px;color:var(--muted);">Social content system, rebranding, and campaign design for a trendy urban eatery.</p>  
+    </div>  
+    <div class="card">  
+      <div class="portfolio-placeholder" style="background:linear-gradient(135deg,#3a2a1e,#6a4a2e);display:flex;align-items:center;justify-content:center;font-size:30px;">🎬</div>  
+      <span class="tag">Motion</span>  
+      <h3>Orion Tech</h3>  
+      <p style="font-size:14px;color:var(--muted);">Animated brand video, logo reveal, and product explainer for a SaaS startup.</p>  
+    </div>  
+    <div class="card">  
+      <div class="portfolio-placeholder" style="background:linear-gradient(135deg,#2a1a1a,#5a2a2a);display:flex;align-items:center;justify-content:center;font-size:30px;">🎨</div>  
+      <span class="tag">Brand Strategy</span>  
+      <h3>Forma Fitness</h3>  
+      <p style="font-size:14px;color:var(--muted);">Full rebrand with new positioning, visual identity, and digital rollout strategy.</p>  
+    </div>  
+  </div>  
+</div>  <!-- ==================== CONTACT ==================== -->  <div class="page" id="contact">  
+  <h2 class="section-title">Get In Touch</h2>  
+  <p class="section-sub">Let's start building something great together</p>    <div class="contact-grid">  
+    <div class="contact-info">  
+      <h3>We'd Love to Hear From You</h3>  
+      <p style="color:var(--muted);font-size:15px;line-height:1.8;margin-bottom:30px;">  
+        Whether you have a clear brief or just an idea, reach out and let's explore what's possible.  
+        We typically respond within 24 hours.  
+      </p>  
+      <div class="contact-item"><span>📧</span><span>hello@zurumedia.com</span></div>  
+      <div class="contact-item"><span>📞</span><span>+2348102407071</span></div>  
+      <div class="contact-item"><span>📍</span><span>PH · Nigeria · Remote</span></div>  
+      <div class="contact-item"><span>🕐</span><span>Mon – Fri, 9am – 6pm</span></div>  
+    </div>  <div>  
+  <input type="text" placeholder="Your Name" />  
+  <input type="email" placeholder="Email Address" />  
+  <input type="text" placeholder="Subject" />  
+  <textarea placeholder="Tell us about your project..."></textarea>  
+  <button class="btn btn-primary" style="width:100%;margin-top:6px;" onclick="handleSubmit()">Send Message</button>  
+</div>
+
+  </div>  
+</div>  <!-- FOOTER -->  <footer>  
+  <p>© 2026 Zuru Media. All rights reserved. &nbsp;|&nbsp; Built with intention.</p>  
+</footer>  <!-- WHATSAPP FLOAT -->  <a class="whatsapp" href="https://wa.me/2348102407071" target="_blank" title="Chat on WhatsApp">  
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="white">  
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>  
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.847L.057 23.886a.5.5 0 0 0 .609.61l6.102-1.485A
