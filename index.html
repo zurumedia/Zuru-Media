@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zuru Media — God Mode System</title>
+
+<style>
+:root{
+    --cedar-brown:#8B5A2B;
+    --silk-milk:#F7F1E8;
+    --dark:#111;
+    --text:#2b2b2b;
+    --glass:rgba(255,255,255,0.7);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Arial;
+}
+
+body{
+    background:var(--silk-milk);
+    color:var(--text);
+    scroll-behavior:smooth;
+}
+
+/* HEADER */
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(247,241,232,0.85);
+    backdrop-filter:blur(20px);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 18px;
+    border-bottom:1px solid #e6e6e6;
+    z-index:1000;
+}
+
+.logo{
+    font-weight:900;
+    color:var(--cedar-brown);
+    letter-spacing:2px;
+}
+
+nav a{
+    margin-left:10px;
+    font-size:12px;
+    text-decoration:none;
+    color:var(--text);
+}
+
+nav a:hover{
+    color:var(--cedar-brown);
+}
+
+/* HERO */
+.hero{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+    background:radial-gradient(circle at top, rgba(139,90,43,0.15), transparent 60%);
+}
+
+.hero h1{
+    font-size:44px;
+}
+
+.hero span{
+    color:var(--cedar-brown);
+}
+
+.hero p{
+    margin-top:10px;
+    max-width:600px;
+    line-height:1.6;
+}
+
+/* STATS */
+.stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    padding:20px;
+}
+
+.stat{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.05);
+}
+
+.stat h2{
+    color:var(--cedar-brown);
+    font-size:32px;
+}
+
+/* SECTION TITLE */
+.title{
+    text-align:center;
+    margin:40px 0 20px;
+    font-size:20px;
+}
+
+/* ABOUT */
+.about{
+    padding:0 18px;
+}
+
+.card{
+    background:white;
+    padding:18px;
+    margin-bottom:12px;
+    border-radius:14px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+}
+
+/* ===================== */
+/* ✅ TEAM SECTION ADDED */
+/* ===================== */
+
+.team{
+    padding:0 18px;
+}
+
+.member{
+    background:white;
+    padding:14px;
+    margin-bottom:10px;
+    border-radius:12px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+}
+
+.member b{
+    color:var(--cedar-brown);
+}
+
+/* PORTFOLIO */
+.gallery{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    padding:0 18px;
+}
+
+.item{
+    height:120px;
+    border-radius:14px;
+    background:linear-gradient(135deg,var(--cedar-brown),#c79a6a);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:12px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* REVIEWS */
+.reviews{
+    padding:0 18px;
+}
+
+.review{
+    background:white;
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:12px;
+}
+
+.stars{ color:gold; }
+
+/* CONTACT */
+.contact{
+    padding:20px 18px;
+}
+
+input,textarea{
+    width:100%;
+    margin-top:8px;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #ddd;
+}
+
+button{
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:var(--cedar-brown);
+    color:white;
+}
+
+/* ACTION BUTTONS */
+.actions{
+    display:flex;
+    gap:10px;
+    padding:0 18px;
+}
+
+.btn{
+    flex:1;
+    text-align:center;
+    padding:12px;
+    border-radius:10px;
+    text-decoration:none;
+    font-size:12px;
+    color:white;
+}
+
+.wa{background:#25D366;}
+.mail{background:#444;}
+
+/* MODAL */
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+    display:none;
+    align-items:center;
+    justify-content:center;
+}
+
+.modal-content{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    width:85%;
+    max-width:400px;
+}
+
+/* ANIM */
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">ZURU MEDIA</div>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#team">Team</a>
+        <a href="#work">Work</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div>
+        <h1>Welcome to <span>Zuru Media</span></h1>
+        <p>A content://com.android.externalstorage.documents/tree/primary%3ADocuments::primary:Documents/zuru.final.mode.htmlPremium creative agency delivering world-class branding, design, and digital experiences.</p>
+    </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+    <div class="stat">
+        <h2 id="jobs">0</h2>
+        <p>Jobs Completed</p>
+    </div>
+
+    <div class="stat">
+        <h2>98%</h2>
+        <p>Client Satisfaction</p>
+    </div>
+
+    <div class="stat">
+        <h2>120+</h2>
+        <p>Happy Clients</p>
+    </div>
+
+    <div class="stat">
+        <h2>24/7</h2>
+        <p>Support</p>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<h2 class="title" id="about">About Us</h2>
+<div class="about">
+    <div class="card">
+        <b>Mission</b>
+        <p>To build premium digital brands with world-class creative systems.</p>
+    </div>
+
+    <div class="card">
+        <b>Vision</b>
+        <p>To become a global creative powerhouse in design and media production.</p>
+    </div>
+</div>
+
+<!-- ===================== -->
+<!-- ✅ TEAM SECTION HERE -->
+<!-- ===================== -->
+
+<h2 class="title" id="team">Team</h2>
+
+<div class="team">
+
+    <div class="member"><b>Founder & Creative Director:</b> Destiny Nicholas Onyekaozuru</div>
+    <div class="member"><b>Brand Marketer:</b> Maya Osei</div>
+    <div class="member"><b>Graphics & VFX:</b> DN Aesthetics</div>
+    <div class="member"><b>Video Editor:</b> Moon Edit</div>
+    <div class="member"><b>CTO:</b> Miracle Chinagorom</div>
+    <div class="member"><b>Head of Team:</b> The Tech Guru</div>
+    <div class="member"><b>Videographer:</b> Shot_by Triumph</div>
+    <div class="member"><b>Brand Strategist:</b> Chijindu Nicholas</div>
+    <div class="member"><b>Brand Finance Expert:</b> Joe Bright Maxwell</div>
+    <div class="member"><b>Visual Assistant:</b> Esquire</div>
+    <div class="member"><b>Hotline:</b> 2348102407071</div>
+
+</div>
+
+<!-- PORTFOLIO -->
+<h2 class="title" id="work">Portfolio</h2>
+
+<div class="gallery">
+    <div class="item" onclick="openModal('Brand Identity Project')">Professional Branding 01</div>
+    <div class="item" onclick="openModal('Logo Design Project')">Digital Marketing  02</div>
+    <div class="item" onclick="openModal('Motion Graphics')">Photography 03</div>
+    <div class="item" onclick="openModal('Web UI Design')">Web Development 04</div>
+    <div class="item" onclick="openModal('Poster Design')">Graphics designing 05</div>
+    <div class="item" onclick="openModal('Video Editing')">Video creation and Editing 06</div>
+</div>
+
+<!-- REVIEWS -->
+<h2 class="title" id="reviews">Reviews</h2>
+
+<div class="reviews">
+    <div class="review">
+        <div class="stars">★★★★★</div>
+        “Absolutely premium work. Zuru Media changed our brand identity.”
+    </div>
+
+    <div class="review">
+        <div class="stars">★★★★★</div>
+        “Fast delivery and top-tier design quality.”
+    </div>
+
+    <div class="review">
+        <div class="stars">★★★★★</div>
+        “Best creative agency experience we’ve had.”
+    </div>
+</div>
+
+<!-- CONTACT -->
+<h2 class="title" id="contact">Contact</h2>
+
+<div class="contact">
+    <input placeholder="Name">
+    <input placeholder="Email">
+    <textarea rows="4" placeholder="Message"></textarea>
+    <button onclick="send()">Send Message</button>
+</div>
+
+<div class="actions">
+    <a class="btn wa" href="https://wa.me/2348102407071" target="_blank">WhatsApp</a>
+    <a class="btn mail" href="mailto:chijindunicholasdestiny05@gmail.com">Email</a>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <h3 id="modalText">Project</h3>
+        <br>
+        <button onclick="closeModal()">Close</button>
+    </div>
+</div>
+
+<footer style="text-align:center;padding:25px;font-size:12px;">
+    © 2026 Zuru Media — copyright
+</footer>
+
+<script>
+// COUNTER
+let count = 0;
+let target = 756;
+
+setInterval(()=>{
+    if(count < target){
+        count += 6;
+        document.getElementById("jobs").innerText = count;
+    }
+},10);
+
+// MODAL
+function openModal(text){
+    document.getElementById("modalText").innerText = text;
+    document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+    document.getElementById("modal").style.display="none";
+}
+
+// CONTACT
+function send(){
+    alert("Message sent successfully to Zuru Media!");
+}
+</script>
+
+</body>
+  </html>
