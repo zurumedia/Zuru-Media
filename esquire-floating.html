@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esquire AI Floating Chat</title>
+
+<style>
+:root{
+    --bg:#0f0f14;
+    --panel:#1a1a25;
+    --accent:#8B5A2B;
+    --text:#fff;
+}
+
+/* Floating Button */
+#chatBtn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:60px;
+    height:60px;
+    background:var(--accent);
+    color:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    cursor:pointer;
+    box-shadow:0 10px 20px rgba(0,0,0,0.3);
+    z-index:999;
+}
+
+/* Chat Box */
+#chatBox{
+    position:fixed;
+    bottom:90px;
+    right:20px;
+    width:320px;
+    height:420px;
+    background:var(--panel);
+    border-radius:15px;
+    display:none;
+    flex-direction:column;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    z-index:999;
+}
+
+/* Header */
+.header{
+    background:var(--accent);
+    padding:10px;
+    color:white;
+    font-weight:bold;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* Messages */
+.messages{
+    flex:1;
+    padding:10px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    background:#111;
+}
+
+.msg{
+    padding:8px;
+    border-radius:10px;
+    max-width:80%;
+    font-size:14px;
+}
+
+.user{background:var(--accent); align-self:flex-end;}
+.bot{background:#2a2a3a; align-self:flex-start;}
+
+/* Input */
+.inputArea{
+    display:flex;
+    padding:8px;
+    background:#1a1a25;
+}
+
+input{
+    flex:1;
+    padding:8px;
+    border:none;
+    border-radius:8px;
+    outline:none;
+}
+
+button{
+    background:var(--accent);
+    border:none;
+    color:white;
+    padding:8px 10px;
+    margin-left:5px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* WhatsApp */
+.wa{
+    text-align:center;
+    padding:8px;
+    background:#25D366;
+    color:black;
+    font-weight:bold;
+    text-decoration:none;
+    font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- FLOAT BUTTON -->
+<div id="chatBtn">💬</div>
+
+<!-- CHAT BOX -->
+<div id="chatBox">
+
+    <div class="header">
+        Esquire AI
+        <span onclick="toggleChat()" style="cursor:pointer;">✖</span>
+    </div>
+
+    <div class="messages" id="messages">
+        <div class="msg bot">Hello 👋 I am Esquire, your Zuru Media assistant. How can I help?</div>
+    </div>
+
+    <div class="inputArea">
+        <input id="input" placeholder="Ask Esquire..." />
+        <button onclick="send()">➤</button>
+    </div>
+
+    <a class="wa"
+       href="https://wa.me/2348102407071?text=Hello%20Zuru%20Media%2C%20I%20need%20help%20from%20Esquire%20AI"
+       target="_blank">
+       Continue on WhatsApp
+    </a>
+
+</div>
+
+<script>
+let chatBox = document.getElementById("chatBox");
+let chatBtn = document.getElementById("chatBtn");
+
+chatBtn.onclick = toggleChat;
+
+function toggleChat(){
+    chatBox.style.display = chatBox.style.display === "flex" ? "none" : "flex";
+}
+
+/* Simple AI Logic (No backend) */
+function send(){
+    let input = document.getElementById("input");
+    let msg = input.value;
+    if(!msg) return;
+
+    addMessage(msg, "user");
+
+    let reply = getReply(msg.toLowerCase());
+
+    setTimeout(()=> addMessage(reply, "bot"), 500);
+
+    input.value = "";
+}
+
+function addMessage(text, type){
+    let div = document.createElement("div");
+    div.className = "msg " + type;
+    div.innerText = text;
+    document.getElementById("messages").appendChild(div);
+}
+
+/* Fake intelligence rules */
+function getReply(text){
+    if(text.includes("price")){
+        return "Our pricing depends on the service: branding, video editing, or full production.";
+    }
+    if(text.includes("video")){
+        return "We create cinematic ads, reels, and promotional videos. Tell me your idea.";
+    }
+    if(text.includes("hello")){
+        return "Hello! Welcome to Esquire AI at Zuru Media.";
+    }
+    if(text.includes("contact")){
+        return "You can reach our team anytime via WhatsApp below.";
+    }
+    return "I understand your request. Tap WhatsApp below to speak directly with the Zuru Media team.";
+}
+</script>
+
+</body>
+          </html>
