@@ -413,7 +413,25 @@ function closeModal(){
 
 // CONTACT
 function send(){
-    alert("Message sent successfully to Zuru Media!");
+    let name = document.querySelector(".contact input:nth-of-type(1)").value;
+    let email = document.querySelector(".contact input:nth-of-type(2)").value;
+    let message = document.querySelector(".contact textarea").value;
+
+    let subject = "Message from Zuru Media Website - " + name;
+
+    let body = 
+`Name: ${name}
+Email: ${email}
+
+Message:
+${message}`;
+
+    let gmailLink = "https://mail.google.com/mail/?view=cm&fs=1&to=chijindunicholasdestiny05@gmail.com"
+        + "&su=" + encodeURIComponent(subject)
+        + "&body=" + encodeURIComponent(body);
+
+    window.open(gmailLink, "_blank");
+}
 }
 </script>
 
